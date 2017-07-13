@@ -1,0 +1,62 @@
+---
+output:
+  md_document:
+    variant: markdown_github
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  error = FALSE, message = FALSE, warning = FALSE,
+  comment = "#>",
+  fig.path = "README-"
+)
+```
+
+# auklet: Analysis and visualization of your eBird sightings
+
+`auklet` provides tools for analyzing and visualizing your personal [eBird](http://ebird.org) data. Your personal sightings can be downloaded as a CSV file from the [Download My Data](http://ebird.org/ebird/downloadMyData) page on the eBird website.
+
+## Installation
+
+Install `auklet` from GitHub using:
+
+```{r install, eval = FALSE}
+# install.packages("devtools")
+devtools::install_github("CornellLabofOrnithology/auk")
+```
+
+## Usage
+
+All functions in `auklet` begin with `eb_` (for eBird) to aid tab completion. Import your eBird sightings data into a data frame with `eb_sightings()`:
+
+```{r import}
+library(auklet)
+library(dplyr)
+# load example data inclued with the package
+ebird_data <- system.file("extdata/MyEBirdData.csv", package = "ebird") %>%
+  eb_sightings()
+ebird_data
+```
+
+In addition to true, countable species, your eBird data includes other taxa that can't be resolved to the species level (e.g. "spuhs" such as *Empidonax sp.*) or aren't countable (e.g. domestic species). Other taxa in your data may be reported at a level below species (e.g. subspecies or recognizable forms). `eb_sightings()` contains additional fields to help in resolving these issues. `species_code`, `species_common`, and `species_scientific` are `NA` for taxa that aren't resolvable to countable species, and give the corresponding species for taxa reported below species.
+
+Once your eBird data are imported, you can begin summarizing and visualizing them. For example, use `eb_daylist()` to creat daily life lists, i.e. a data frame of species seen on each day of the year.
+
+```{r day-list}
+day_lists <- eb_daylist(ebird_data)
+# species seen on feb 14
+filter(day_lists, month == 2, day == 14) %>% 
+  select(month, day, species_common)
+```
+
+These day can be summarized to daily counts with `summary()` or visualized with `plot()`.
+
+```{r summ-plot, fig.width = 10, fig.height = 4}
+summary(day_lists) %>% 
+  head()
+plot(day_lists)
+```
+

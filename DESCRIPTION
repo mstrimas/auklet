@@ -1,0 +1,24 @@
+Package: auklet
+Title: Analysis and Visualization of Your eBird Sightings
+Version: 0.0.0.9000
+Date: 2017-07-15
+Authors@R: person("Matthew", "Strimas-Mackey", email = "mstrimas@gmail.com", role = c("aut", "cre"))
+Description: Tools for manipulating, analyzing, and visualizing your personal 
+    bird sightings downloaded from eBird (<http://ebird.org>).
+Depends: R (>= 3.1.2)
+License: GPL-3 + file LICENSE
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.0.1
+Roxygen: list(markdown = TRUE)
+Imports:
+    dplyr (>= 0.7.1),
+    readr,
+    stringr,
+    stringi,
+    ggplot2,
+    viridis,
+    rlang,
+    lubridate
+URL: https://github.com/mstrimas/auklet
+BugReports: https://github.com/mstrimas/auklet/issues
