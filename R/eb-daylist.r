@@ -27,6 +27,8 @@ eb_daylist.eb_sightings <- function(x) {
   # determine species list
   day_list <- x %>%
     dplyr::filter(!is.na(.data$report_as)) %>%
+    # remove life list uploads
+    dplyr::filter(.data$date != as.Date("1900-01-01")) %>%
     dplyr::mutate(year = lubridate::year(.data$date),
                   month = lubridate::month(.data$date),
                   day = lubridate::day(.data$date)) %>%

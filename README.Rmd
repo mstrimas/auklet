@@ -39,7 +39,6 @@ library(dplyr)
 # load example data inclued with the package
 ebird_data <- system.file("extdata/MyEBirdData.csv", package = "auklet") %>%
   eb_sightings()
-ebird_data
 ```
 
 In addition to true, countable species, your eBird data includes other taxa that can't be resolved to the species level (e.g. "spuhs" such as *Empidonax sp.*) or aren't countable (e.g. domestic species). Other taxa in your data may be reported at a level below species (e.g. subspecies or recognizable forms). `eb_sightings()` contains additional fields to help in resolving these issues. `species_code`, `species_common`, and `species_scientific` are `NA` for taxa that aren't resolvable to countable species, and give the corresponding species for taxa reported below species.
