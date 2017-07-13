@@ -39,6 +39,6 @@ reported below species. these fields are all \code{NA} for taxa not resolvable
 to species.
 }
 \examples{
-system.file("extdata/MyEBirdData.csv", package = "ebird") \%>\%
+system.file("extdata/MyEBirdData.csv", package = "auklet") \%>\%
   eb_sightings()
 }

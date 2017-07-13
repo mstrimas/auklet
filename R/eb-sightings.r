@@ -28,7 +28,7 @@
 #'   your personal sightings.
 #' @export
 #' @examples
-#' system.file("extdata/MyEBirdData.csv", package = "ebird") %>%
+#' system.file("extdata/MyEBirdData.csv", package = "auklet") %>%
 #'   eb_sightings()
 eb_sightings <- function(file, countable = FALSE) {
   # checks

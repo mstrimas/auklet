@@ -13,7 +13,7 @@
 #'   your personal sightings.
 #' @export
 #' @examples
-#' day_list <- system.file("extdata/MyEBirdData.csv", package = "ebird") %>%
+#' day_list <- system.file("extdata/MyEBirdData.csv", package = "auklet") %>%
 #'   eb_sightings() %>%
 #'   eb_daylist()
 #' summary(day_list)
