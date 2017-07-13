@@ -4,7 +4,8 @@
 #' seen on that day regardless of year. For each species, the year in which that
 #' species was first observed is shown. Use [summary()] to summarize the list of
 #' species seen each day into counts of the number of species seen each day.
-#' To visualize your day life lists, use [plot()].
+#' To visualize your day life lists, use [plot()]. The concept of the daily
+#' life list was introduced to me by [Drew Weber](http://www.nemesisbird.com/).
 #'
 #' @param x [eb_sightings] object; your personal eBird sightings
 #'
@@ -16,7 +17,7 @@
 #'   eb_sightings() %>%
 #'   eb_daylist()
 #' summary(day_list)
-#' plot(day_list, target = 50)
+#' plot(day_list)
 eb_daylist <- function(x) {
   UseMethod("eb_daylist")
 }
@@ -77,25 +78,17 @@ summary.eb_daylist <- function(object, by_year = FALSE, ...) {
   }
 }
 
-#' @param target numeric; add a line to the plot showing your targeted number
-#'   of species to see each day.
 #' @param title character; plot title.
 #' @param subtitle character; plot subtitle.
 #' @describeIn eb_daylist Visualize your day life lists
 #' @export
-plot.eb_daylist <- function(x, target, title, subtitle, ...) {
+plot.eb_daylist <- function(x, title, subtitle, ...) {
   # daily counts
   x <- summary(x, by_year = TRUE) %>%
     # use 2016 becaues it's a leap year
     dplyr::mutate(date = lubridate::ymd(paste(2016, .data$month, .data$day,
                                               sep = "-")))
 
-  # put target at 0 if not given
-  if (missing(target)) {
-    target <- 0
-  } else {
-    stopifnot(is.numeric(target), length(target) == 1)
-  }
   # default titles
   if (missing(title)) {
     title <- "eBird Daily Life Lists"
@@ -117,8 +110,8 @@ plot.eb_daylist <- function(x, target, title, subtitle, ...) {
   # y axis
   yrng <- dplyr::group_by(x, .data$month, .data$day) %>%
     dplyr::summarize(n = sum(.data$n))
+  ymean <- sum(yrng$n) / 365
   ymax <- max(yrng$n)
-  ymax <- max(ymax, target)
   # determin sensible breaks
   if (ymax < 200) {
     brk <- 25
@@ -132,7 +125,7 @@ plot.eb_daylist <- function(x, target, title, subtitle, ...) {
 
   # plot
   ggplot2::ggplot(x, ggplot2::aes_string(x = "date", y = "n")) +
-    ggplot2::geom_hline(yintercept = target, color = "light blue", size = 1) +
+    ggplot2::geom_hline(yintercept = ymean, color = "light blue", size = 1) +
     ggplot2::geom_bar(ggplot2::aes_string(fill = "year"), stat = "identity",
                       width = 1) +
     ggplot2::geom_hline(yintercept = 0, color = "#666666", size = 1.5) +

@@ -10,7 +10,7 @@ eb_daylist(x)
 
 \method{summary}{eb_daylist}(object, by_year = FALSE, ...)
 
-\method{plot}{eb_daylist}(x, target, title, subtitle, ...)
+\method{plot}{eb_daylist}(x, title, subtitle, ...)
 }
 \arguments{
 \item{x}{\link{eb_sightings} object; your personal eBird sightings}
@@ -22,9 +22,6 @@ species. Set this to \code{TRUE} if, for example, you're interested in how many
 new species you added each year on a given day.}
 
 \item{...}{not used}
-
-\item{target}{numeric; add a line to the plot showing your targeted number
-of species to see each day.}
 
 \item{title}{character; plot title.}
 
@@ -39,7 +36,8 @@ Generate a daily life list, i.e. for each day of the year list the species
 seen on that day regardless of year. For each species, the year in which that
 species was first observed is shown. Use \code{\link[=summary]{summary()}} to summarize the list of
 species seen each day into counts of the number of species seen each day.
-To visualize your day life lists, use \code{\link[=plot]{plot()}}.
+To visualize your day life lists, use \code{\link[=plot]{plot()}}. The concept of the daily
+life list was introduced to me by \href{http://www.nemesisbird.com/}{Drew Weber}.
 }
 \section{Methods (by class)}{
 \itemize{
@@ -54,5 +52,5 @@ day_list <- system.file("extdata/MyEBirdData.csv", package = "ebird") \%>\%
   eb_sightings() \%>\%
   eb_daylist()
 summary(day_list)
-plot(day_list, target = 50)
+plot(day_list)
 }
