@@ -4,3 +4,7 @@ get_header <- function(x, sep = ",") {
     `[[`(1) %>%
     trimws()
 }
+
+is_integer <- function(x) {
+  is.integer(x) || (is.numeric(x) && all(x == as.integer(x)))
+}

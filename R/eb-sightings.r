@@ -76,15 +76,15 @@ eb_sightings <- function(file, countable = FALSE) {
 
   # split state and country
   s_p <- stringr::str_split(s$state_province, "-", n = 2, simplify = TRUE)
-  s$state <- s_p[, 1]
-  s$province <- s_p[, 2]
   s$state_province <- NULL
+  s$country <- s_p[, 1]
+  s$state_province <- s_p[, 2]
 
   # bring in taxonomy
   s <- s %>%
     dplyr::select(-.data$common_name, -.data$taxonomic_order) %>%
-    dplyr::select(.data$submission_id, .data$count, .data$state, .data$province,
-           dplyr::everything()) %>%
+    dplyr::select(.data$submission_id, .data$count, .data$country,
+                  .data$state_province, dplyr::everything()) %>%
     dplyr::rename(name_scientific = .data$scientific_name) %>%
     dplyr::right_join(auklet::eb_taxonomy, ., by = "name_scientific") %>%
     dplyr::select(.data$submission_id, dplyr::everything())
@@ -98,7 +98,7 @@ eb_sightings <- function(file, countable = FALSE) {
     warning(m)
   }
   if (countable) {
-    s <- dplyr::filter(s, !is.na(.data$report_as))
+    s <- eb_countable(s)
   }
   class(s) <- c("eb_sightings", class(s))
   return(s)

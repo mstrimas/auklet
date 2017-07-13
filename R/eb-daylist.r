@@ -25,8 +25,7 @@ eb_daylist <- function(x) {
 #' @export
 eb_daylist.eb_sightings <- function(x) {
   # determine species list
-  day_list <- x %>%
-    dplyr::filter(!is.na(.data$report_as)) %>%
+  day_list <- eb_countable(x) %>%
     # remove life list uploads
     dplyr::filter(.data$date != as.Date("1900-01-01")) %>%
     dplyr::mutate(year = lubridate::year(.data$date),
@@ -50,6 +49,11 @@ eb_daylist.eb_sightings <- function(x) {
 
   class(day_list) <- c("eb_daylist", class(day_list))
   return(day_list)
+}
+
+#' @export
+eb_daylist.data.frame <- function(x) {
+  eb_daylist.eb_sightings(df_to_eb(x))
 }
 
 #' @param object `eb_daylist` object; your daily life lists.

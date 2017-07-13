@@ -1,0 +1,13 @@
+navbar:
+  title: ~
+  type: default
+  left:
+  - text: Function Reference
+    href: reference/index.html
+  right:
+  - icon: fa-github fa-lg
+    href: https://github.com/mstrimas/auklet
+
+authors:
+  Matthew Strimas-Mackey:
+    href: http://strimas.com

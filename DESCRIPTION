@@ -19,6 +19,7 @@ Imports:
     ggplot2,
     viridis,
     rlang,
-    lubridate
+    lubridate,
+    countrycode
 URL: https://github.com/mstrimas/auklet
 BugReports: https://github.com/mstrimas/auklet/issues

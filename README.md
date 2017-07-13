@@ -1,3 +1,4 @@
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 auklet: Analysis and visualization of your eBird sightings
 ==========================================================
@@ -27,9 +28,24 @@ ebird_data <- system.file("extdata/MyEBirdData.csv", package = "auklet") %>%
   eb_sightings()
 ```
 
-In addition to true, countable species, your eBird data includes other taxa that can't be resolved to the species level (e.g. "spuhs" such as *Empidonax sp.*) or aren't countable (e.g. domestic species). Other taxa in your data may be reported at a level below species (e.g. subspecies or recognizable forms). `eb_sightings()` contains additional fields to help in resolving these issues. `species_code`, `species_common`, and `species_scientific` are `NA` for taxa that aren't resolvable to countable species, and give the corresponding species for taxa reported below species.
+Once your eBird data are imported, you can begin summarizing and visualizing them. The most basic functionality is generating your life list.
 
-Once your eBird data are imported, you can begin summarizing and visualizing them. For example, use `eb_daylist()` to creat daily life lists, i.e. a data frame of species seen on each day of the year.
+``` r
+eb_lifelist(ebird_data) %>% 
+  select(species_common, date, country) %>% 
+  head()
+#> # A tibble: 6 x 3
+#>                 species_common       date country
+#>                          <chr>     <date>   <chr>
+#> 1   White-faced Whistling-Duck 2014-06-03      CO
+#> 2 Black-bellied Whistling-Duck 2014-05-27      CO
+#> 3  Greater White-fronted Goose 2011-02-20      US
+#> 4                   Snow Goose 2011-02-20      US
+#> 5                 Ross's Goose 2011-02-20      US
+#> 6                        Brant 2011-02-21      US
+```
+
+Life lists can, of course, be viewed directly on the eBird website; however, other functions produce summaries or visualizations not available in eBird. For example, use `eb_daylist()` to creat daily life lists, i.e. a data frame of species seen on each day of the year.
 
 ``` r
 day_lists <- eb_daylist(ebird_data)
@@ -69,3 +85,8 @@ plot(day_lists)
 ```
 
 <img src="README-summ-plot-1.png" style="display: block; margin: auto;" />
+
+Acknowledgments
+---------------
+
+This package, and some of the specific functionality, was inspired by conversations with [Drew Weber](http://www.nemesisbird.com/), [Taylor Long](http://www.mtaylorlong.com/), and Tom Auer.
