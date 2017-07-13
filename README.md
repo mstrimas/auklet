@@ -23,7 +23,7 @@ All functions in `auklet` begin with `eb_` (for eBird) to aid tab completion. Im
 library(auklet)
 library(dplyr)
 # load example data inclued with the package
-ebird_data <- system.file("extdata/MyEBirdData.csv", package = "ebird") %>%
+ebird_data <- system.file("extdata/MyEBirdData.csv", package = "auklet") %>%
   eb_sightings()
 ebird_data
 #> # A tibble: 7,048 x 29
