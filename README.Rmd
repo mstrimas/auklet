@@ -55,7 +55,7 @@ filter(day_lists, month == 2, day == 14) %>%
 
 These day lists can be summarized to daily counts with `summary()` or visualized with `plot()`.
 
-```{r summ-plot, fig.width = 10, fig.height = 4, fig.retina = TRUE}
+```{r summ-plot, fig.width = 10, fig.height = 4, fig.retina = TRUE, dev = "svg"}
 summary(day_lists) %>% 
   head()
 plot(day_lists)

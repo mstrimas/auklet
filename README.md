@@ -91,4 +91,4 @@ summary(day_lists) %>%
 plot(day_lists)
 ```
 
-<img src="README-summ-plot-1.png" style="display: block; margin: auto;" />
+<img src="README-summ-plot-1.svg" style="display: block; margin: auto;" />
