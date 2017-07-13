@@ -74,7 +74,7 @@ filter(day_lists, month == 2, day == 14) %>%
 #> 10     2    14     White-throated Swift
 ```
 
-These day can be summarized to daily counts with `summary()` or visualized with `plot()`.
+These day lists can be summarized to daily counts with `summary()` or visualized with `plot()`.
 
 ``` r
 summary(day_lists) %>% 
@@ -91,4 +91,4 @@ summary(day_lists) %>%
 plot(day_lists)
 ```
 
-![](README-summ-plot-1.png)
+<img src="README-summ-plot-1.png" style="display: block; margin: auto;" />

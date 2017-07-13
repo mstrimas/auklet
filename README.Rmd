@@ -11,7 +11,8 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   error = FALSE, message = FALSE, warning = FALSE,
   comment = "#>",
-  fig.path = "README-"
+  fig.path = "README-",
+  fig.align = "center"
 )
 ```
 
@@ -52,9 +53,9 @@ filter(day_lists, month == 2, day == 14) %>%
   select(month, day, species_common)
 ```
 
-These day can be summarized to daily counts with `summary()` or visualized with `plot()`.
+These day lists can be summarized to daily counts with `summary()` or visualized with `plot()`.
 
-```{r summ-plot, fig.width = 10, fig.height = 4}
+```{r summ-plot, fig.width = 10, fig.height = 4, fig.retina = TRUE}
 summary(day_lists) %>% 
   head()
 plot(day_lists)
