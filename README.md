@@ -11,7 +11,7 @@ Install `auklet` from GitHub using:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("CornellLabofOrnithology/auk")
+devtools::install_github("mstrimas/auklet")
 ```
 
 Usage
