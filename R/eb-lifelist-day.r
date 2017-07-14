@@ -9,21 +9,21 @@
 #'
 #' @param x [eb_sightings] object; your personal eBird sightings
 #'
-#' @return A [dplyr::tibble], with additional class `eb_daylist`, containing
-#'   your personal sightings.
+#' @return A [dplyr::tibble], with additional class `eb_lifelist_day`,
+#'   containing your personal sightings.
 #' @export
 #' @examples
 #' day_list <- system.file("extdata/MyEBirdData.csv", package = "auklet") %>%
 #'   eb_sightings() %>%
-#'   eb_daylist()
+#'   eb_lifelist_day()
 #' summary(day_list)
 #' plot(day_list)
-eb_daylist <- function(x) {
-  UseMethod("eb_daylist")
+eb_lifelist_day <- function(x) {
+  UseMethod("eb_lifelist_day")
 }
 
 #' @export
-eb_daylist.eb_sightings <- function(x) {
+eb_lifelist_day.eb_sightings <- function(x) {
   # determine species list
   day_list <- eb_countable(x) %>%
     # remove life list uploads
@@ -47,25 +47,25 @@ eb_daylist.eb_sightings <- function(x) {
     dplyr::rename(species_code = .data$report_as) %>%
     dplyr::arrange(.data$month, .data$day, .data$year, .data$species_code)
 
-  class(day_list) <- c("eb_daylist", class(day_list))
+  class(day_list) <- c("eb_lifelist_day", class(day_list))
   return(day_list)
 }
 
 #' @export
-eb_daylist.data.frame <- function(x) {
-  eb_daylist.eb_sightings(df_to_eb(x))
+eb_lifelist_day.data.frame <- function(x) {
+  eb_lifelist_day.eb_sightings(df_to_eb(x))
 }
 
-#' @param object `eb_daylist` object; your daily life lists.
+#' @param object `eb_lifelist_day` object; your daily life lists.
 #' @param by_year logical; whether to retain the year first when tallying up
 #'   species. Set this to `TRUE` if, for example, you're interested in how many
 #'   new species you added each year on a given day.
 #' @param ... not used
 #'
-#' @describeIn eb_daylist Summarize daily life lists into counts of species seen
-#'   on each day.
+#' @describeIn eb_lifelist_day Summarize daily life lists into counts of species
+#'   seen on each day.
 #' @export
-summary.eb_daylist <- function(object, by_year = FALSE, ...) {
+summary.eb_lifelist_day <- function(object, by_year = FALSE, ...) {
   stopifnot(is.logical(by_year), length(by_year) == 1)
 
   # tally up species seen each day
@@ -86,9 +86,9 @@ summary.eb_daylist <- function(object, by_year = FALSE, ...) {
 
 #' @param title character; plot title.
 #' @param subtitle character; plot subtitle.
-#' @describeIn eb_daylist Visualize your day life lists
+#' @describeIn eb_lifelist_day Visualize your day life lists
 #' @export
-plot.eb_daylist <- function(x, title, subtitle, ...) {
+plot.eb_lifelist_day <- function(x, title, subtitle, ...) {
   # daily counts
   x <- summary(x, by_year = TRUE) %>%
     # use 2016 becaues it's a leap year

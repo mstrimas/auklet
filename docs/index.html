@@ -89,8 +89,8 @@ ebird_data &lt;-<span class="st"> </span><span class="kw">system.file</span>(<sp
 <span class="co">#&gt; 4                   Snow Goose 2011-02-20      US</span>
 <span class="co">#&gt; 5                 Ross's Goose 2011-02-20      US</span>
 <span class="co">#&gt; 6                        Brant 2011-02-21      US</span></code></pre></div>
-<p>Life lists can, of course, be viewed directly on the eBird website; however, other functions produce summaries or visualizations not available in eBird. For example, use <code><a href="reference/eb_daylist.html">eb_daylist()</a></code> to creat daily life lists, i.e. a data frame of species seen on each day of the year.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">day_lists &lt;-<span class="st"> </span><span class="kw"><a href="reference/eb_daylist.html">eb_daylist</a></span>(ebird_data)
+<p>Life lists can, of course, be viewed directly on the eBird website; however, other functions produce summaries or visualizations not available in eBird. For example, use <code><a href="reference/eb_lifelist_day.html">eb_lifelist_day()</a></code> to creat daily life lists, i.e. a data frame of species seen on each day of the year.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">day_lists &lt;-<span class="st"> </span><span class="kw"><a href="reference/eb_lifelist_day.html">eb_lifelist_day</a></span>(ebird_data)
 <span class="co"># species seen on feb 14</span>
 <span class="kw">filter</span>(day_lists, month ==<span class="st"> </span><span class="dv">2</span>, day ==<span class="st"> </span><span class="dv">14</span>) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw">select</span>(month, day, species_common)

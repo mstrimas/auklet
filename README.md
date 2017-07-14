@@ -45,10 +45,10 @@ eb_lifelist(ebird_data) %>%
 #> 6                        Brant 2011-02-21      US
 ```
 
-Life lists can, of course, be viewed directly on the eBird website; however, other functions produce summaries or visualizations not available in eBird. For example, use `eb_daylist()` to creat daily life lists, i.e. a data frame of species seen on each day of the year.
+Life lists can, of course, be viewed directly on the eBird website; however, other functions produce summaries or visualizations not available in eBird. For example, use `eb_lifelist_day()` to creat daily life lists, i.e. a data frame of species seen on each day of the year.
 
 ``` r
-day_lists <- eb_daylist(ebird_data)
+day_lists <- eb_lifelist_day(ebird_data)
 # species seen on feb 14
 filter(day_lists, month == 2, day == 14) %>% 
   select(month, day, species_common)
