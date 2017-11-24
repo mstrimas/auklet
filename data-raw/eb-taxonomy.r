@@ -1,15 +1,15 @@
 library(tidyverse)
 library(stringi)
+library(readxl)
 
 # eBird taxonomy
 # source: http://help.ebird.org/customer/en/portal/articles/1006825-the-ebird-taxonomy
 # typically updated annually in the late summer
-eb_taxonomy <- read_csv("data-raw/eBird_Taxonomy_v2016.csv",
-                           na = c("NA", "")) %>%
+eb_taxonomy <- read_xlsx("data-raw/eBird_Taxonomy_v2017_18Aug2017.xlsx") %>%
   set_names(tolower(names(.))) %>%
   select(taxon_order, category, species_code,
          name_common = primary_com_name, name_scientific = sci_name,
-         order = order, family = family, report_as) %>%
+         order = order1, family = family, report_as) %>%
   # ascii conversion
   mutate(name_common = stri_trans_general(name_common, "latin-ascii")) %>%
   # fill report_as field to aid joining
